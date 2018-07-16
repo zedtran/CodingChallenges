@@ -1,15 +1,34 @@
-
-
 import java.util.*;
 
+/** 
+   This class demonstrates interesting challenges with Strings in Java. 
+   Each function in this class represents a different challenge.
+*/
 
 public class StringSequence {
 
    public static void main(String args[]) {
-      String s = "AABCDDDEEEFFGGGGAAEZZZZZZPPPPPPPPPPP";
-      System.out.println("Call to getLongestChar(String str) returned: " + getLongestSubseqChar(s));
+      String s1 = "AABCDDDEEEFFGGGGAAEZZZZZZPPPPPPPPPPP";
+      String s2 = "ABCD";
+      
+      // Call to function getLongestSubseqChar(String str)
+      System.out.println("Call to getLongestChar(String str) returned: " + getLongestSubseqChar(s1) + "\n");
+      
+      // Call to permutation(String prefix, String strToPermute)
+      System.out.println("Call to permutation(String prefix, String str) returned: ");
+      permutation("--> ", s2);
    }
-
+   
+   /** 
+      This function was based on a CSDojo challenge 
+      (https://www.youtube.com/watch?v=qRNB8CV3_LU ) 
+      and shows my attempt at a solution. The goal with this
+      function is to return the character with the longest subsequence 
+      in a given string along with the longest count for that character.
+      
+      TIME COMPLEXITY: ____
+      SPACE COMPLEXITY: ____  
+   */
    public static String getLongestSubseqChar(String str) {
       HashMap<Character, Integer> charMap = new HashMap<>();
       char[] chars = str.toCharArray();
@@ -58,5 +77,23 @@ public class StringSequence {
       String ret = "[ " + greatestChar + ", " + greatestCharCount + " ]";
       return ret;
    
+   }
+   
+   /** 
+      This function returns every permutation of a given string.
+      
+      TIME COMPLEXITY: ____
+      SPACE COMPLEXITY: ____ 
+   */
+   private static void permutation(String prefix, String str) {
+      int n = str.length();
+      if (n == 0) {
+         System.out.println(prefix);
+      }
+      else {
+         for (int i = 0; i < n; i++) {
+            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
+         }
+      }           
    }
 }
