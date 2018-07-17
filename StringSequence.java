@@ -8,15 +8,28 @@ import java.util.*;
 public class StringSequence {
 
    public static void main(String args[]) {
-      String s1 = "AABCDDDEEEFFGGGGAAEZZZZZZPPPPPPPPPPP";
-      String s2 = "ABCD";
+      String s1 = "AABCDDDEEEFFGGGGAAEZZZZZZPPPPPPPPPPPOOOOUUUUUUUUUUUUUUUUUIIIII"; // Test getLongestSubseqChar(String str)
+      String s2 = "ABCD"; // Test permutation(String prefix, String str)
+      String s3 = "ABCDEFG"; // Test #1 of isStringUnique(String s)
+      String s4 = "ABCDEFGA"; // Test #2 of isStringUnique(String s)
+      String s5 = "abcd", s6 = "acbd"; // Test isPermutation() and addPermuteArrList() called in isPermutation
 
       // Call to function getLongestSubseqChar(String str)
-      System.out.println("Call to getLongestChar(String str) returned: " + getLongestSubseqChar(s1) + "\n");
+      System.out.println("\nCall to getLongestChar(String str) returned: " + getLongestSubseqChar(s1) + "\n");
 
       // Call to permutation(String prefix, String strToPermute)
-      System.out.println("Call to permutation(String prefix, String str) returned: ");
+      System.out.println("\nCall to permutation(String prefix, String str) returned: ");
       permutation("--> ", s2);
+
+      System.out.println("\nCall to isStringUnique(String s) on String s3 returned (boolean): " + isStringUnique(s3));
+
+      System.out.println("\nCall to isStringUnique(String s) on String s4 returned (boolean): " + isStringUnique(s4));
+
+      System.out.println("\nCall to isPermutation() on Strings s5 & s6 returned (boolean): " + isPermutation(s5, s6, ""));
+
+
+      // INSERT LINES ABOVE
+      System.out.println("\n\n******** END PROGRAM ********\n\n");
    }
 
    /**
@@ -96,4 +109,67 @@ public class StringSequence {
          }
       }
    }
+
+
+   /**
+        Implement an algorithm to determine if a string has all unique characters.
+        -- What if you cannot use additional data structures?
+
+        TIME COMPLEXITY: ____
+        SPACE COMPLEXITY: ____
+   */
+   public static boolean isStringUnique(String s) {
+       HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
+       // Could have likely implemented an ArrayList instead of HashMap for this, since we
+       // don't really need a Map.Entry<K, V> pair, but this works. Might be considered overkill though
+       for (char ch: s.toCharArray()) {
+           int count = 1;
+           if (!charMap.containsKey(ch)) {
+               charMap.put(ch, count);
+           }
+           else {
+               return false;
+           }
+       }
+       return true;
+   }
+
+   /**
+        Given two strings, write a method to decide if one is a permutation of the other.
+        Uses addPermuteArrList()
+   */
+   public static boolean isPermutation(String s1, String s2, String prefix) {
+       ArrayList<String> permuteList = new ArrayList<String>();
+       int n = Math.max(s1.length(), s2.length());
+       String sTemp;
+       if (s1.length() != s2.length()) {
+           return false;
+       }
+       if (s1.length() >= s2.length()) {
+           sTemp = s1;
+       }
+       else {
+           sTemp = s2;
+       }
+       addPermuteArrList(prefix, sTemp, permuteList);
+       if (permuteList.contains(s1) && permuteList.contains(s2)) {
+           return true;
+       }
+       return false;
+   }
+
+   /** CALLED IN isPermutation() Given two strings, write a method to decide if one is a permutation of the other. */
+   public static void addPermuteArrList(String prefix, String suffix, ArrayList<String> arrList) {
+       int n = suffix.length();
+	   if (n == 0) {
+	        arrList.add(prefix);
+	   }
+       else {
+	        for (int i = 0; i < n; i++) {
+                addPermuteArrList(prefix + suffix.charAt(i), suffix.substring(0, i) + suffix.substring(i + 1,  n), arrList);
+            }
+        }
+    }
+
+
 }
