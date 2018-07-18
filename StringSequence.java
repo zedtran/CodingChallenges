@@ -13,6 +13,7 @@ public class StringSequence {
       String s3 = "ABCDEFG"; // Test #1 of isStringUnique(String s)
       String s4 = "ABCDEFGA"; // Test #2 of isStringUnique(String s)
       String s5 = "abcd", s6 = "acbd"; // Test isPermutation() and addPermuteArrList() called in isPermutation
+      String s7 = "apple", s8 = "pleap", s9 = "leapl";
 
       // Call to function getLongestSubseqChar(String str)
       System.out.println("\nCall to getLongestChar(String str) returned: " + getLongestSubseqChar(s1) + "\n");
@@ -22,10 +23,12 @@ public class StringSequence {
       permutation("--> ", s2);
 
       System.out.println("\nCall to isStringUnique(String s) on String s3 returned (boolean): " + isStringUnique(s3));
-
       System.out.println("\nCall to isStringUnique(String s) on String s4 returned (boolean): " + isStringUnique(s4));
 
       System.out.println("\nCall to isPermutation() on Strings s5 & s6 returned (boolean): " + isPermutation(s5, s6, ""));
+
+      System.out.println("\nCall to isRotation() on Strings s7 & s8 returned (boolean): " + isRotation(s7, s8));
+      System.out.println("\nCall to isRotation() on Strings s7 & s9 returned (boolean): " + isRotation(s7, s9));
 
 
       // INSERT LINES ABOVE
@@ -97,6 +100,7 @@ public class StringSequence {
 
       TIME COMPLEXITY: ____
       SPACE COMPLEXITY: ____
+
    */
    private static void permutation(String prefix, String str) {
       int n = str.length();
@@ -170,6 +174,28 @@ public class StringSequence {
             }
         }
     }
+
+    /**
+        Assume you have a method isSubstring which checks if one word is a
+        substring of another. Given two strings, s1 and s2, write code to check if s2 is
+        a rotation of si using only one call to isSubstring (e.g.,"waterbottle"is a rotation
+        of "erbottlewat").
+
+        TEST 1: str1 = "apple" , str2 = "pleap"
+        TEST 2: str1 = "apple" , str2 = "leape"
+    */
+    // Is s2 a rotation of s1?
+    public static boolean isRotation(String str1, String str2) {
+	    if (str1.length() != str2.length()) {
+		    return false;
+        }
+        String s3 = str1 + str1;
+	    if (s3.contains(str2)) {
+	        return true;
+        }
+	    return false;
+    }
+
 
 
 }
