@@ -178,11 +178,15 @@ public class StringSequence {
     /**
         Assume you have a method isSubstring which checks if one word is a
         substring of another. Given two strings, s1 and s2, write code to check if s2 is
-        a rotation of si using only one call to isSubstring (e.g.,"waterbottle"is a rotation
+        a rotation of s1 using only one call to isSubstring (e.g.,"waterbottle"is a rotation
         of "erbottlewat").
 
         TEST 1: str1 = "apple" , str2 = "pleap"
         TEST 2: str1 = "apple" , str2 = "leape"
+
+        Assumptions/Considerations:
+        -- Assume cases are the same (If not, we can just call toUpperCase() or toLowerCase() on both strings)
+        -- String 2's length must be exactly equal to string 1's length for the purpose of determining rotation 
     */
     // Is s2 a rotation of s1?
     public static boolean isRotation(String str1, String str2) {
