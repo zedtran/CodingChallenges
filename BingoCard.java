@@ -52,7 +52,13 @@ public class BingoCard{
 
      public static void main(String[] args){
 
-        System.out.print(Arrays.deepToString(createBingoCard()));
+        System.out.println("\n");
+
+        /** ANOTHER WAY OF PRINTING (In-Line) */
+        //System.out.print(Arrays.deepToString(createBingoCard()));
+
+        printMatrix(createBingoCard());
+        System.out.println("\n");
 
      }
 
@@ -166,4 +172,16 @@ public class BingoCard{
          }
 
      }
+
+
+     //Displays a 2d array in the console, one line per row.
+     // SOURCE: https://stackoverflow.com/a/12845292/9718306
+    static void printMatrix(int[][] grid) {
+        for(int r = 0; r < grid.length; r++) {
+           for(int c = 0; c < grid[r].length; c++) {
+               System.out.print(grid[r][c] + "\t");
+           }
+           System.out.println();
+        }
+    }
 }
